@@ -18,10 +18,9 @@
 	if(!$) {
 		return console.warn('Unslider needs jQuery');
 	}
-
-	$.Unslider = function(context, options) {
-		var self = this;
-
+	//参数1为jquery对象 即$('.div')
+$.Unslider = function(context, options) {
+		var self = this;//new 方式调用函数 this为空对像		
 		//  Create an Unslider reference we can use everywhere
 		self._ = 'unslider';
 
