@@ -18,7 +18,7 @@
 	if(!$) {
 		return console.warn('Unslider needs jQuery');
 	}
-	//参数1为jquery对象 即$('.div')
+	//参数1为jquery对象 即$('.slide') 需要初始化slide的那个jquery标签 
 $.Unslider = function(context, options) {
 		var self = this;//new 方式调用函数 this为空对像		
 		//  Create an Unslider reference we can use everywhere
@@ -56,8 +56,8 @@ $.Unslider = function(context, options) {
 				prev: 37,
 				next: 39
 			},
-
-			//  Do you want to generate clickable navigation
+			//四个点(对应四个slide)		
+//  Do you want to generate clickable navigation
 			//  to skip to each slide? Accepts boolean true/false or
 			//  a callback function per item to generate.
 			nav: true,
@@ -158,14 +158,18 @@ $.Unslider = function(context, options) {
 			self.calculateSlides();
 
 			//  Listen to a ready event
+			//触发$('.unslider').on('unslider-reader',function(){ })事件	
+			
 			self.$context.trigger(self._ + '.ready');
 
 			//  Everyday I'm chainin'
+					
 			return self.animate(self.options.index || self.current, 'init');
 		};
 
 		self.setup = function() {
 			//  Add a CSS hook to the main element
+			//wrap方法将给当前 $context元素添加个父div			
 			self.$context.addClass(self.prefix + self.options.animation).wrap('<div class="' + self._ + '" />');
 			self.$parent = self.$context.parent('.' + self._);
 
@@ -432,6 +436,7 @@ $.Unslider = function(context, options) {
 			self.setIndex(to);
 
 			//  Add a callback method to do stuff with
+			/**触发注册再$(.unslider).on('unslider-change',function(index,slide){})事件		**/			
 			self.$context.trigger(self._ + '.change', [to, self.$slides.eq(to)]);
 
 			//  Delegate the right method - everything's named consistently
